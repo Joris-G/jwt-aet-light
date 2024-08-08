@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Application Chrono</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Application Chrono</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  @for (menuItem of menuItems; track $index) {
+  <ion-card
+    [routerLink]="[menuItem.path]"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    button="true"
+  >
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon slot="start" [name]="menuItem.icon"></ion-icon>
+        <ion-label>{{menuItem.menuName }}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  }
+</ion-content>

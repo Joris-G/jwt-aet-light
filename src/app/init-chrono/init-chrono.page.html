@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Création d'une nouvelle mesure</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false" fixedSlotPlacement="true" color="light">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Création d'une nouvelle mesure</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  @if (process) {
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+      <ion-card-title>La pièce</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{process.designation}} {{process.partNumber}}
+    </ion-card-content>
+  </ion-card>
+  <app-init-chrono-form
+    (formSubmit)="onFormSubmit($event)"
+  ></app-init-chrono-form>
+  }
+</ion-content>

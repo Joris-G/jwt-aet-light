@@ -1,0 +1,38 @@
+<ion-card>
+  <ion-card-content>
+    @if (processList$ | async ;as processes) { @if (processes.length > 0) {
+    <ion-list>
+      @for (process of processes; track $index) {
+      <ion-card>
+        <ion-card-header>
+          {{ process.designation }}
+        </ion-card-header>
+        <ion-card-content>
+          <ion-button
+            (click)="onNewChronoClick($index)"
+            expand="block"
+            fill="clear"
+            shape="round"
+          >
+            Nouveau chrono
+          </ion-button>
+          @if (process.chronos!.length>0) {
+
+          <ion-list>
+            @for (chrono of process.chronos; track $index) {
+
+            <ion-item>
+              <ion-label>Awesome Label</ion-label>
+            </ion-item>
+            }
+          </ion-list>
+          }
+        </ion-card-content>
+      </ion-card>
+
+      }
+    </ion-list>
+
+    }@else { Aucun process à afficher }}
+  </ion-card-content>
+</ion-card>

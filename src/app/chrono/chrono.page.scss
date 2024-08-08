@@ -1,0 +1,18 @@
+ion-content {
+  display: flex;
+  flex-grow: 1;
+  overflow-y: hidden;
+  height: 100%;
+  > ion-grid {
+    height: 100%;
+  }
+}
+ion-grid > ion-row {
+  flex-grow: 1;
+  position: sticky;
+  height: 100%;
+  > ion-col {
+    height: 100%;
+    overflow-y: auto;
+  }
+}

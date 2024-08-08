@@ -1,0 +1,37 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Création d'une nouvelle pièce à analyser</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form [formGroup]="initProcessForm" (ngSubmit)="onSubmit()">
+      <ion-list>
+        <ion-item>
+          <ion-input
+            formControlName="partNumber"
+            label="Part Number"
+            labelPlacement="fixed"
+            type="text"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            formControlName="designation"
+            label="Désignation"
+            labelPlacement="fixed"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            formControlName="project"
+            label="Projet"
+            labelPlacement="fixed"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" type="submit">Enregistrer</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>

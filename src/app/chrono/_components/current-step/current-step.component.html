@@ -1,0 +1,41 @@
+<!-- Groupe de Valeur Ajoutée (VA) -->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Étape en cours</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="timer">
+      {{ elapsedTime$ | async | date : "mm:ss" }}
+    </div>
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+
+    <ion-segment value="va" #timeType [(ngModel)]="timeType">
+      <ion-segment-button value="va" (click)="measureTime('va')">
+        <ion-label>Valeur ajouté (VA)</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="nva">
+        <ion-label>Non-Valeur Ajoutée (NVA)</ion-label>
+      </ion-segment-button>
+      <!-- Ajoutez d'autres types de temps VA si nécessaire -->
+    </ion-segment>
+    @if (timeType.value === "nva") {
+    <!-- Groupe de Non-Valeur Ajoutée (NVA) -->
+    <ion-card>
+      <ion-card-content>
+        @for (nvaType of nvaTypes; track $index) {
+        <ion-button expand="block" (click)="measureTime(nvaType.value)">{{
+          nvaType.viewValue
+        }}</ion-button>
+        }
+
+        <ion-button expand="block" (click)="takePhoto()"
+          >Prendre une photo</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+    }
+  </ion-card-content>
+</ion-card>

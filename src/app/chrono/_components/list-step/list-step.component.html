@@ -1,0 +1,25 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Liste des Étapes</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngFor="let step of steps">
+        <ion-label>
+          <h2>{{ step.timeType }}</h2>
+          <p>Début : {{ step.startTime | date : "shortTime" }}</p>
+          <p>
+            Fin :
+            {{
+              step.endTime ? (step.endTime | date : "shortTime") : "En cours"
+            }}
+          </p>
+          <p>
+            Durée :
+            {{ step | stepDurationInSeconds | number : "1.0-2" }} secondes
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

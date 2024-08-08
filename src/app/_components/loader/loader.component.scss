@@ -1,0 +1,19 @@
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.messages {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.messages div {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.messages div.active {
+  opacity: 1;
+}

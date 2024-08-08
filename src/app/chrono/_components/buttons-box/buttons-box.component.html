@@ -1,0 +1,43 @@
+<ion-card>
+  @if (isStarted) {
+  <ion-card-content>
+    <ion-buttons slot="start">
+      <ion-button
+        (click)="onStartClick()"
+        expand="block"
+        fill="clear"
+        shape="round"
+        slot="start"
+      >
+        Pause
+      </ion-button>
+      <ion-button
+        slot="end"
+        (click)="onStopClick()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
+        Etape Suivante
+      </ion-button>
+    </ion-buttons>
+  </ion-card-content>
+
+  } @else {
+
+  <!-- <ion-card-header>
+          <ion-card-title>Prise de Mesure</ion-card-title>
+        </ion-card-header> -->
+  <ion-card-content>
+    <ion-button
+      (click)="onStartClick()"
+      expand="block"
+      fill="clear"
+      shape="round"
+    >
+      Démarrer
+    </ion-button>
+  </ion-card-content>
+
+  }
+</ion-card>
