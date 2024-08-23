@@ -1,22 +1,50 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonButton,
+  IonIcon,
+  IonGrid,
+  IonRow,
+  IonCol,
+} from '@ionic/angular/standalone';
 import { ButtonsBoxComponent } from './_components/buttons-box/buttons-box.component';
 import { ChronoHeaderComponent } from './_components/chrono-header/chrono-header.component';
 import { CurrentStepComponent } from './_components/current-step/current-step.component';
 import { ListStepComponent } from './_components/list-step/list-step.component';
-import { ChronoService } from './_services/chrono.service';
-import { Observable } from 'rxjs';
 import { ProcessService } from '../_services/process.service';
-import { Chrono, Process } from '../_interfaces/process';
+import { Chrono, ChronoStep, Process, TimeType } from '../_interfaces/process';
+import { ChronoService } from '../_services/chrono.service';
 
 @Component({
   selector: 'app-chrono',
   templateUrl: './chrono.page.html',
   styleUrls: ['./chrono.page.scss'],
   standalone: true,
-  imports: [IonCol, IonRow, IonGrid, AsyncPipe, IonIcon, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ListStepComponent, ButtonsBoxComponent, ChronoHeaderComponent, CurrentStepComponent,]
+  imports: [
+    IonCol,
+    IonRow,
+    IonGrid,
+    AsyncPipe,
+    IonIcon,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    ListStepComponent,
+    ButtonsBoxComponent,
+    ChronoHeaderComponent,
+    CurrentStepComponent,
+  ],
 })
 export class ChronoPage {
   // processService = inject(ProcessService);
@@ -25,25 +53,30 @@ export class ChronoPage {
   process: Process;
   isStarted$ = this.chronoService.isStarted$;
   chrono: Chrono;
+  currentStep: ChronoStep;
   constructor() {
     this.process = this.processService.currentProcess;
     this.chrono = this.chronoService.currentChrono;
+    this.currentStep = this.chronoService.currentChronoStep;
   }
 
-  buttonBoxClick(clickType: "start" | "stop" | "next") {
+  onUpdateCurrentStep(updatedStep: ChronoStep) {
+    this.chronoService.updateChronoStep(updatedStep);
+  }
+
+  buttonBoxClick(clickType: 'start' | 'stop' | 'next') {
     switch (clickType) {
-      case "start":
+      case 'start':
         this.chronoService.startChrono();
         break;
-      case "stop":
+      case 'stop':
         this.chronoService.stopChrono();
         break;
-      case "next":
+      case 'next':
         this.chronoService.nextStep();
         break;
       default:
         break;
     }
-
   }
 }

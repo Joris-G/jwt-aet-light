@@ -5,7 +5,7 @@
   </ion-card-header>
   <ion-card-content>
     <div class="timer">
-      {{ elapsedTime$ | async | date : "mm:ss" }}
+      {{ currentStep | stepDurationInSeconds | date : "mm:ss" }}
     </div>
     <ion-item>
       <ion-label position="stacked">Description</ion-label>

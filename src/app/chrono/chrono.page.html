@@ -12,6 +12,8 @@
   </ion-header>
 
   <ion-grid>
+    @if (process) {
+
     <ion-row>
       <ion-col size="2">
         <app-chrono-header [process]="process"></app-chrono-header>
@@ -20,13 +22,20 @@
         <app-list-step [steps]="chrono.chronoSteps"></app-list-step>
       </ion-col>
       <ion-col size="6">
-        <app-current-step></app-current-step>
+        @if (isStarted$ | async) {
+
+        <app-current-step
+          [currentStep]="currentStep"
+          (currentStepEmmiter)="onUpdateCurrentStep($event)"
+        ></app-current-step>
+        }
 
         <app-buttons-box
           (buttonClick)="buttonBoxClick($event)"
+          [isStarted$]="isStarted$"
         ></app-buttons-box>
       </ion-col>
     </ion-row>
+    }
   </ion-grid>
-  @if (process) { } @if (isStarted$ | async) { }
 </ion-content>

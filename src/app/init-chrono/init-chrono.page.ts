@@ -1,20 +1,42 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardSubtitle, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonCardSubtitle,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+} from '@ionic/angular/standalone';
 import { InitChronoFormComponent } from './_components/init-chrono-form/init-chrono-form.component';
 import { Router } from '@angular/router';
 import { ProcessService } from '../_services/process.service';
 import { Chrono, Process } from '../_interfaces/process';
-import { Observable } from 'rxjs';
-import { ChronoService } from '../chrono/_services/chrono.service';
+import { ChronoService } from '../_services/chrono.service';
 
 @Component({
   selector: 'app-init-chrono',
   templateUrl: './init-chrono.page.html',
   styleUrls: ['./init-chrono.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonCardSubtitle, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, InitChronoFormComponent]
+  imports: [
+    IonCardContent,
+    IonCardTitle,
+    IonCardHeader,
+    IonCard,
+    IonCardSubtitle,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    InitChronoFormComponent,
+  ],
 })
 export class InitChronoPage {
   @Input()
@@ -32,8 +54,7 @@ export class InitChronoPage {
   //   // this.process = this.processService.currentProcess
   // }
   onFormSubmit(chrono: Chrono) {
-    this.chronoService.setCurrentChrono(chrono)
-    this.router.navigate(['/chrono'])
+    this.chronoService.setCurrentChrono(chrono);
+    this.router.navigate(['/chrono']);
   }
-
 }

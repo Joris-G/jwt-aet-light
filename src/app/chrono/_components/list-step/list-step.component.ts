@@ -1,8 +1,14 @@
 import { AsyncPipe, DatePipe, DecimalPipe, NgFor } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel } from "@ionic/angular/standalone";
-import { ChronoService } from '../../_services/chrono.service';
-import { Observable } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import {
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonList,
+  IonItem,
+  IonLabel,
+} from '@ionic/angular/standalone';
 import { ChronoStep } from 'src/app/_interfaces/process';
 import { StepDurationInSecondsPipe } from 'src/app/_pipes/step-duration-in-seconds.pipe';
 
@@ -18,8 +24,22 @@ import { StepDurationInSecondsPipe } from 'src/app/_pipes/step-duration-in-secon
   templateUrl: './list-step.component.html',
   styleUrls: ['./list-step.component.scss'],
   standalone: true,
-  imports: [IonLabel, IonItem, IonList, IonCardContent, IonCardTitle, IonCardHeader, IonCard, DatePipe, DecimalPipe, NgFor, AsyncPipe, StepDurationInSecondsPipe],
+  imports: [
+    IonLabel,
+    IonItem,
+    IonList,
+    IonCardContent,
+    IonCardTitle,
+    IonCardHeader,
+    IonCard,
+    DatePipe,
+    DecimalPipe,
+    NgFor,
+    AsyncPipe,
+    StepDurationInSecondsPipe,
+  ],
 })
 export class ListStepComponent {
-  @Input() steps?: ChronoStep[];
+  @Input({ required: true })
+  steps: ChronoStep[];
 }

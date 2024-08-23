@@ -1,5 +1,5 @@
 <ion-card>
-  @if (isStarted) {
+  @if (isStarted$ | async) {
   <ion-card-content>
     <ion-buttons slot="start">
       <ion-button
