@@ -48,10 +48,13 @@ export class ButtonsBoxComponent {
   @Input({ required: true })
   isStarted$: Observable<boolean>;
   @Output()
-  buttonClick: EventEmitter<'start' | 'stop' | 'next'> = new EventEmitter();
+  buttonClick: EventEmitter<'start' | 'stop' | 'next' | 'pause'> = new EventEmitter();
 
   onStartClick() {
     this.buttonClick.emit('start');
+  }
+  onPauseClick() {
+    this.buttonClick.emit('pause');
   }
   onStopClick() {
     this.buttonClick.emit('stop');

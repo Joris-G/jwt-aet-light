@@ -11,7 +11,7 @@ import {
   IonIcon,
   IonGrid,
   IonRow,
-  IonCol,
+  IonCol, IonSpinner
 } from '@ionic/angular/standalone';
 import { ButtonsBoxComponent } from './_components/buttons-box/buttons-box.component';
 import { ChronoHeaderComponent } from './_components/chrono-header/chrono-header.component';
@@ -20,13 +20,14 @@ import { ListStepComponent } from './_components/list-step/list-step.component';
 import { ProcessService } from '../_services/process.service';
 import { Chrono, ChronoStep, Process, TimeType } from '../_interfaces/process';
 import { ChronoService } from '../_services/chrono.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-chrono',
   templateUrl: './chrono.page.html',
   styleUrls: ['./chrono.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonSpinner,
     IonCol,
     IonRow,
     IonGrid,
@@ -47,24 +48,38 @@ import { ChronoService } from '../_services/chrono.service';
   ],
 })
 export class ChronoPage {
-  // processService = inject(ProcessService);
   chronoService = inject(ChronoService);
   processService = inject(ProcessService);
+
   process: Process;
-  isStarted$ = this.chronoService.isStarted$;
   chrono: Chrono;
-  currentStep: ChronoStep;
+  // currentStep: ChronoStep;
+  currentStep$: Observable<ChronoStep> = this.chronoService.currentChronoStep$;
+  isStarted$ = this.chronoService.isStarted$;
+  elapsedTime$ = this.chronoService.elapsedTime$;
+
   constructor() {
+    const startDate = new Date();
+    console.log(`chronoPage construit à  ${startDate.toLocaleTimeString()}`);
     this.process = this.processService.currentProcess;
     this.chrono = this.chronoService.currentChrono;
-    this.currentStep = this.chronoService.currentChronoStep;
+    // this.currentStep$ = this.chronoService.currentChronoStep$;
+    // this.isStarted$.subscribe((started) => console.log(started))
+    // this.elapsedTime$.subscribe((time) => {
+    //   console.log('elapsedTime : ', time);
+    // });
   }
+
+
+
 
   onUpdateCurrentStep(updatedStep: ChronoStep) {
-    this.chronoService.updateChronoStep(updatedStep);
+    console.log(updatedStep);
+    this.chronoService.updateStep(updatedStep);
+    this.chronoService.nextStep();
   }
 
-  buttonBoxClick(clickType: 'start' | 'stop' | 'next') {
+  buttonBoxClick(clickType: 'start' | 'stop' | 'next' | 'pause') {
     switch (clickType) {
       case 'start':
         this.chronoService.startChrono();

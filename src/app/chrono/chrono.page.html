@@ -11,31 +11,61 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid>
-    @if (process) {
+  <!-- Check if process exists -->
+  <ng-container *ngIf="process; else noProcess">
+    <ion-grid>
+      <ion-row>
+        <!-- COLONNE HEADER -->
+        <ion-col size="2">
+          <app-chrono-header [process]="process"></app-chrono-header>
+        </ion-col>
 
-    <ion-row>
-      <ion-col size="2">
-        <app-chrono-header [process]="process"></app-chrono-header>
-      </ion-col>
-      <ion-col size="4">
-        <app-list-step [steps]="chrono.chronoSteps"></app-list-step>
-      </ion-col>
-      <ion-col size="6">
-        @if (isStarted$ | async) {
+        <!-- COLONNE STEPS -->
+        <ion-col size="4">
+          <app-list-step [steps]="chrono.chronoSteps"></app-list-step>
+        </ion-col>
 
-        <app-current-step
-          [currentStep]="currentStep"
-          (currentStepEmmiter)="onUpdateCurrentStep($event)"
-        ></app-current-step>
-        }
+        <!-- COLONNE MESURE -->
+        <ion-col size="6">
+          <!-- Check if isStarted$ and currentStep$ are truthy -->
+          <ng-container *ngIf="isStarted$ | async; else startButton">
+            <ng-container *ngIf="currentStep$ | async as currentStep">
+              <app-current-step
+                [currentStep]="currentStep"
+                [timer]="elapsedTime$ | async"
+                (currentStepEmmiter)="onUpdateCurrentStep($event)"
+              ></app-current-step>
+            </ng-container>
+            <!-- Fallback button if currentStep$ is falsy -->
+            <ng-template #startButton>
+              <ion-button
+                (click)="buttonBoxClick('start')"
+                expand="block"
+                fill="clear"
+                shape="round"
+              >
+                START CHRONO
+              </ion-button>
+            </ng-template>
+          </ng-container>
+          <!-- If isStarted$ is falsy -->
+          <ng-template #startButton>
+            <ion-button
+              (click)="buttonBoxClick('start')"
+              expand="block"
+              fill="clear"
+              shape="round"
+            >
+              START CHRONO
+            </ion-button>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
 
-        <app-buttons-box
-          (buttonClick)="buttonBoxClick($event)"
-          [isStarted$]="isStarted$"
-        ></app-buttons-box>
-      </ion-col>
-    </ion-row>
-    }
-  </ion-grid>
+  <!-- If no process is available -->
+  <ng-template #noProcess>
+    <ion-spinner name="bubbles"></ion-spinner>
+  </ng-template>
 </ion-content>

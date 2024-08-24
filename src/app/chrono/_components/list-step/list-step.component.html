@@ -7,8 +7,9 @@
       <ion-item *ngFor="let step of steps">
         <ion-label>
           <h2>{{ step.timeType }}</h2>
-          <p>Début : {{ step.startTime | date : "shortTime" }}</p>
+          <p>Description : {{ step.description }}</p>
           <p>
+            Début : {{ step.startTime | date : "shortTime" }}
             Fin :
             {{
               step.endTime ? (step.endTime | date : "shortTime") : "En cours"
@@ -16,7 +17,7 @@
           </p>
           <p>
             Durée :
-            {{ step | stepDurationInSeconds | number : "1.0-2" }} secondes
+            {{ step | stepDurationInSeconds | date : "mm:ss" }} secondes
           </p>
         </ion-label>
       </ion-item>

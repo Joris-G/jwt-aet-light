@@ -15,6 +15,7 @@ export class StepDurationInSecondsPipe implements PipeTransform {
   }
 
   getDurationInSeconds(endTime: Date, startTime: Date): number {
-    return (endTime.getMilliseconds() - startTime.getMilliseconds()) / 1000;
+    console.log(endTime, startTime);
+    return endTime.getTime() - startTime.getTime();
   }
 }

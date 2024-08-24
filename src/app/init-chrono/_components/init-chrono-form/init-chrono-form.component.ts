@@ -54,6 +54,7 @@ export class InitChronoFormComponent implements OnInit {
   onSubmit() {
     if (this.initChronoForm.valid) {
       const newChrono = this.initChronoForm.value as InitChrono;
+      newChrono.chronoSteps = [];
       this.formSubmit.emit(newChrono);
     }
   }
